@@ -1,0 +1,399 @@
+﻿<usermanual>
+						
+Function Acquisition Speed Test (4.0).
+				
+Created by Dr. Bryan Roche (bryan.t.roche@mu.ie), Maynooth University.
+		
+		
+Script Author: Jamie Cummins (psycholojamie@gmail.com), Maynooth University/Universiteit Gent.
+
+Open Science Framework: osf.io/a84sr
+ResearchGate: https://www.researchgate.net/profile/Jamie_Cummins2
+Twitter: https://twitter.com/psycholojamie
+ORCID ID: http://orcid.org/0000-0002-9729-4900
+
+
+
+Script first written 15th November 2017.
+
+Edit history:
+
+16/11/2017:
+1.  Fixed bug that stops RFD_Score from calculating
+2.  Amended so that ITI and feedback values are added into calculation of cumulative time (i.e., not just latency of responses)
+
+22/11/2017:
+1. Added batch file (Full_FAST.iqx) that allows for collection of demographic info.
+2. Changed scripts so that preinstructions for blocks vary contingent on order of presentation of blocks.
+
+To-do:
+Add calculation of FAST 3.0 slope score.
+Rename variables in output to be more user-friendly
+
+
+Some further reading about previous versions of the FAST:
+
+O'Reilly, A., Roche, B., Ruiz, Maria R., Tyndall, I., & Gavin, A. (2012). The Function Acquisition Speed Test (FAST): a Behavior 
+	Analytic Implicit Test for Assessing Stimulus Relations. The Psychological Record, 62(3), 507-528.
+
+OReilly, A., Roche, B., Ruiz, M., Ryan, A., & Campion, G. (2013) A Function Acquisition Speed Test for equivalence relations (FASTER).
+	The Psychological Record, 63, 707-724.
+
+Cartwright, A., Roche, B., Gogarty, M., O’Reilly, A. & Stewart, I. (2016) Using a Modified Function Acquisition Speed Test (FAST) for
+	Assessing Implicit Gender Stereotypes. The Psychological Record, 66, 223-233.
+
+O’Reilly, A., Roche, B., & Cartwright, A. (2014) Function over form: A behavioral approach to implicit attitudes In: Exploring 
+	Implicit Cognition: Learning, Memory, and Social Cognitive Processes.
+
+Cummins, J., Roche, B., Tyndall, I., & Cartwright, A. (2017). The effect of differential stimulus relatedness on implicit test effect 
+	sizes. Journal of the Experimental Analysis of Behavior.
+
+ 
+ 
+Distinguishing features of FAST 4.0:
+
+The primary difference in the current variant relative to others lies in the instantiation of termination of blocks following meeting 
+either a ‘total correct’ criterion, or a specific cumulative time limit (350 seconds). 
+
+The addition of these features of block termination (rather than the presence of fixed trial length blocks of variant 3.0, or a 
+‘correct-in-a-row’ criterion akin to that of predecessor FASTs) is intended to allow for ease of interpretation of response time and 
+accuracy scores. 
+
+A further important addition is the implementation of a new scoring format for fluency. This format, the rate-fluency differential 
+(RFD) score, adapts a Skinnerian conceptualisation of fluency for each FAST block. Fluency in a block is represented by the difference
+between the rate of correct responding and rate of incorrect responding of the subject. In particular, this scoring format is 
+effective in filtering out issues of rapid, random responding which have been problematic for previous scoring formats 
+(e.g., regression line slope values fitted to cumulative records of responding in blocks). Rapid, random responding simply registers 
+a score of approximately zero with the current scoring format.
+
+
+Given the functional philosophy from which the FAST has been developed, modifications to the FAST procedure are welcome 
+(and, in fact, encouraged). Feel free to play around with any/all of the procedural features, such as block length, response windows,
+criteria for correct responding, timeout criteria for blocks, background colour (could be useful as a form of stimulus control), 
+response options (position of response keys can influence responding on implicit measures, cf. Lakens et al., 2011), etc. 
+
+
+
+</usermanual>
+
+*************************************************
+Instructions
+*************************************************
+
+<page intro> 
+^^					Function Acquisition Speed Test 
+^^
+^^Welcome to the Function Acquisition Speed Test (FAST). The FAST is a behaviour-analytic implicit measure which researchers use to measure associations between concepts in an individual's history of learning.
+^^The FAST was developed by Dr. Bryan Roche of Maynooth University, Ireland.
+ ^^
+ 
+</page>
+
+<page end>  
+The experiment is now concluded. 
+Please contact the experimenter.
+</page>
+
+<instruct>
+/ nextkey = ("m")
+</instruct>
+
+<text instructions1>
+/ items = instructions1
+/ fontstyle = ("Arial", 18pt)
+</text>
+
+<item instructions1>
+/ 1 = 
+"In this task, you will need to use the 'z' and 'm' keys on the computer keyboard. 
+Please locate these keys now.
+
+When you next press the 'm' key, words and pictures will begin to flash up on the screen, 
+one at a time. 
+
+The goal of the task is to learn to press either the 'z' or the 'm' key depending on what 
+picture/image appears on the screen, based on the feedback that the test provides you.
+		
+	Try to respond AS QUICKLY AND AS ACCURATELY AS POSSIBLE.
+	
+			When you're ready, press the 'm' key to begin.
+"
+</item>
+
+
+<text instructions2>
+/ items = instructions2
+/ fontstyle = ("Arial", 18pt)
+</text>
+
+<item instructions2>
+/ 1 =
+"When you next press the 'm' key, words and pictures will again begin to flash up on the 
+screen, one at a time. 
+
+As before, the goal of the task is to learn to press either the 'z' or the 'm' key depending 
+on what picture/image appears on the screen, based on the feedback that the test provides you.
+
+	Try to respond AS QUICKLY AND AS ACCURATELY AS POSSIBLE.
+
+			When you're ready, press the 'm' key to begin.
+"
+</item>
+
+
+***********************
+raw data file
+***********************
+<data>
+/ columns = (date, time, group, subject, blockcode, blocknum, trialcode, trialnum, response, correct, latency, 
+stimulusnumber, stimulusitem, expressions.ConCRPM, expressions.ConIRPM, expressions.ConFluency, expressions.InconCRPM, 
+expressions.InconIRPM, expressions.InconFluency, expressions.RFD_Score)
+/ separatefiles = true
+</data>
+
+***********************
+Important output
+***********************
+
+<summarydata>
+/ columns = (script.startdate, script.starttime, script.subjectid, script.groupid,
+expressions.ConCRPM, expressions.ConIRPM, expressions.ConFluency, expressions.InconCRPM, expressions.InconIRPM, 
+expressions.InconFluency, expressions.RFD_Score)
+/ separatefiles = true
+</summarydata>
+
+
+
+*************************************************
+Expressions
+*************************************************
+Involved in calculation of rate-fluency differential score:
+
+ConTotalTime = Cumulative response times on the consistent block
+ConTotalCorrect = Total number of correct responses on the consistent block
+ConTotalIncorrect = Total number of incorrect responses on the consistent block
+ConCRPM = The rate of correct responses per minute in the consistent block
+ConIRPM = The rate of incorrect responses per minute in the consistent block
+ConFluency = AKA the response rate differential (RRD) score; the fluency of the subject in the consistent block (i.e., the difference between CRPM and IRPM)
+InconTotalTime = Cumulative response times on the inconsistent block
+InconTotalCorrect = Total number of correct responses on the inconsistent block
+InconTotalIncorrect = Total number of incorrect responses on the inconsistent block
+InconCRPM = The rate of correct responses per minute in the inconsistent block
+InconIRPM = The rate of incorrect responses per minute in the inconsistent block
+InconFluency = AKA the response rate differential (RRD) score; the fluency of the subject in the inconsistent block (i.e., the difference between CRPM and IRPM)
+RFD_Score = AKA the rate-fluency differential (RFD) score; the difference between RRD scores of subjects on the consistent and inconsistent blocks
+
+<expressions>
+/ ConTotalTime = (block.ConBlock.totalsumlatency + (block.ConBlock.totaltrialcount * 1500))
+/ ConTotalCorrect = block.ConBlock.correctcount
+/ ConTotalIncorrect = block.ConBlock.errorcount
+/ ConCRPM = ((expressions.ConTotalCorrect / expressions.ConTotalTime) * 60000)
+/ ConIRPM = ((expressions.ConTotalIncorrect / expressions.ConTotalTime) * 60000)
+/ ConFluency = (expressions.ConCRPM - expressions.ConIRPM)
+/ InconTotalTime = (block.InconBlock.totalsumlatency + (block.InconBlock.totaltrialcount * 1500))
+/ InconTotalCorrect = block.InconBlock.correctcount
+/ InconTotalIncorrect = block.InconBlock.errorcount
+/ InconCRPM = ((expressions.InconTotalCorrect / expressions.InconTotalTime) * 60000)
+/ InconIRPM = ((expressions.InconTotalIncorrect / expressions.InconTotalTime) * 60000)
+/ InconFluency = (expressions.InconCRPM - expressions.InconIRPM)
+/ RFD_Score = ((expressions.ConFluency) - (expressions.InconFluency)) 
+</expressions>
+
+*************************************************
+Stimuli
+*************************************************
+
+<text pleasant>
+/ items = pleasant
+/ fontstyle = ("Arial", 48pt)
+</text>
+
+<item pleasant>
+/ 1 = "        LOVE         "
+/ 2 = "        PEACE        "
+/ 3 = "        HAPPY        "
+/ 4 = "        PLEASURE     "
+</item>
+
+<text unpleasant>  
+/ items = unpleasant
+/ fontstyle = ("Arial", 48pt)
+</text>
+
+
+<item unpleasant>
+/ 1 = "        EVIL         "
+/ 2 = "        FILTHY       "
+/ 3 = "        UGLY         "
+/ 4 = "        ROTTEN       "
+</item>
+
+<picture white>
+/ items = white
+/ size = (50%, 50%)
+</picture>
+
+<item white>
+/ 1 = "white1.jpg"
+/ 2 = "white2.jpg"
+/ 3 = "white3.jpg"
+/ 4 = "white4.jpg"
+</item>
+
+<picture black>
+/ items = black
+/ size = (50%, 50%)
+</picture>
+
+<item black>
+/ 1 = "black1.jpg"
+/ 2 = "black2.jpg"
+/ 3 = "black3.jpg"
+/ 4 = "black4.jpg"
+</item>
+
+<text errormessage>  
+/ items = ("        WRONG        ")
+/ txcolor = (255, 0, 0)
+/ fontstyle = ("Arial", 48pt)
+</text>
+
+<text correctmessage>
+/ items = ("       CORRECT       ")
+/ txcolor = (255, 0, 0)
+/ fontstyle = ("Arial", 48pt)
+</text>
+
+*************************************************
+Trials
+*************************************************
+
+<trial pleasant>  
+/ stimulusframes = [1=pleasant]
+/ validresponse = ("z", "m")
+/ correctresponse = ("m")
+/ posttrialpause = 1500
+/ timeout = 3000
+</trial>
+
+<trial unpleasant>  
+/ validresponse = ("z", "m")
+/ correctresponse = ("z")
+/ posttrialpause = 1500
+/ stimulusframes = [1=unpleasant]
+/ timeout = 3000
+</trial>
+
+<trial blkright>  
+/ posttrialpause = 1500
+/ validresponse = ("z", "m")
+/ correctresponse = ("m")
+/ stimulusframes = [1=black]
+/ timeout = 3000
+</trial>
+
+<trial blkleft>  
+/ posttrialpause = 1500
+/ validresponse = ("z", "m")
+/ correctresponse = ("z")
+/ stimulusframes = [1=black]
+/ timeout = 3000
+</trial>
+
+<trial whtright>  
+/ posttrialpause = 1500
+/ validresponse = ("z", "m")
+/ correctresponse = ("m")
+/ stimulusframes = [1=white]
+/ timeout = 3000
+</trial>
+
+<trial whtleft>  
+/ posttrialpause = 1500
+/ validresponse = ("z", "m")
+/ correctresponse = ("z")
+/ stimulusframes = [1=white]
+/ timeout = 3000
+</trial>
+
+<trial instructions1>
+/ validresponse = ("m")
+/ correctresponse = ("m")
+/ stimulusframes = [1=instructions1]
+</trial>
+
+<trial instructions2>
+/ validresponse = ("m")
+/ correctresponse = ("m")
+/ stimulusframes = [1=instructions2]
+</trial>
+
+*************************************************
+Blocks
+*************************************************
+<block instructions1>
+/ trials = [1 = instructions1]
+</block>
+
+<block instructions2>
+/ trials = [1 = instructions2]
+</block>
+
+
+<block ConBlock>
+/ trials = [1-100 = noreplace(blkleft, whtright, pleasant, unpleasant)]
+/ correctmessage = (correctmessage, 1500)
+/ errormessage = (errormessage, 1500)
+/ stop = [
+	block.ConBlock.correctcount >= 50
+]
+/ timeout = 350000
+</block>
+
+
+<block InconBlock>
+/ trials = [1-100 = noreplace(blkright, whtleft, pleasant, unpleasant)]
+/ correctmessage = (correctmessage, 1500)
+/ errormessage = (errormessage, 1500)
+/ stop = [
+	block.InconBlock.correctcount >= 50
+]
+/ timeout = 350000
+</block>
+
+*************************************************
+Experimental Layout
+*************************************************
+
+<expt ConFirst> 
+/ preinstructions = (intro)
+/ postinstructions = (end)
+/ subjects = (1 of 2)
+/ groupassignment = subjectnumber
+/ blocks = [1= instructions1; 2 = ConBlock; 3 = instructions2; 4 = InconBlock]
+</expt>
+
+<expt InconFirst>
+/ preinstructions = (intro)
+/ postinstructions = (end)
+/ subjects = (2 of 2)
+/ groupassignment = subjectnumber
+/ blocks = [1= instructions1; 2 = InconBlock; 3 = instructions2; 4 = ConBlock]
+</expt>
+
+<defaults>
+/ screencolor = (white)
+/ fontstyle = ("Arial", 14pt)
+</defaults>
+
+***********************************************************************
+Test Monkey
+***********************************************************************
+<monkey>
+/ latencydistribution = normal(900, 200)
+/ percentcorrect = 100
+</monkey>
+
+***********************************************************************
+end of script
+***********************************************************************

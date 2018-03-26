@@ -1,0 +1,21 @@
+﻿*************************
+Demographics
+*************************
+
+<surveypage demographics>
+/ caption = "Please enter the following information:"
+/ fontstyle = ("Arial", 2.50%, false, false, false, false, 5, 0)
+/ questions = [1=gender; 2=age]
+</surveypage>
+
+<dropdown gender>
+/ caption = "Gender"
+/ options = ("female", "male", "non-binary", "other")
+</dropdown>
+</textbox>
+
+<textbox age>
+/ caption = "Age"
+/ mask = positiveinteger
+/ range = (18, 130)
+</textbox>
